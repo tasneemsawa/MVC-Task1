@@ -1,20 +1,30 @@
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+using Microsoft.Identity.Client;
+using WebApplication1.Data;
+using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
 {
     public class UsersController : Controller
     {
-
-        public string GetUsers()
+        ApplicationDbContext context = new ApplicationDbContext();
+        public ViewResult Index()
         {
+            var user= context.Users2.ToList();
+            return View("Index", user);
 
-            return "hi";
+        }
+
+        public ViewResult Create()
+        {
+            return View("Create");
+        }
+
+        public ViewResult Store(User2 Request)
+        {
+            context.Users2.Add(Request);
+            context.SaveChanges();
+            return View("Create");
         }
     }
 }

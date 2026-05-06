@@ -1,0 +1,47 @@
+﻿@using WebApplication1.Models
+@model List<User2>
+
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="text-info">All Users</h1>
+        <a href="/Users/Create" class="btn btn-info text-white">+ Add New User</a>
+    </div>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-warning text-center shadow-sm">
+            <h4>No Users Found!</h4>
+            <p>Try adding some users to see them listed here.</p>
+        </div>
+    }
+    else
+    {
+        <div class="card shadow-sm">
+            <div class="card-body p-0">
+                <table class="table table-hover mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Age</th>
+                            <th class="text-center">Score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var user in Model)
+                        {
+                            <tr>
+                                <td class="fw-bold">@user.Name</td>
+                                <td>@user.Email</td>
+                                <td>@user.Age</td>
+                                <td class="text-center">
+                                    <span class="badge bg-info text-dark">@user.Score</span>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+</div>
